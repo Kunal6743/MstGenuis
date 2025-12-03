@@ -14,6 +14,22 @@ import re, random
 from difflib import SequenceMatcher
 import os
 
+# ---------------- PASSWORD PROTECTION ----------------
+import streamlit as st
+import os
+
+correct_password = os.getenv("APP_PASSWORD")
+
+st.title("🔐 Secure Access")
+password = st.text_input("Enter Password:", type="password")
+
+if password != correct_password:
+    st.warning("❗ Incorrect password. Enter the correct one to continue.")
+    st.stop()
+
+st.success("✔ Access Granted")
+st.write("---")
+
 # ---------------- CONFIG ----------------
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_MODEL = "llama-3.1-8b-instant"
@@ -911,3 +927,4 @@ if "mst_pdf" in st.session_state:
 
 # footer caption (non-critical)
 # st.caption("⭐ Built by Kunal — SmartTest Architect (Final Clean Version)")
+
